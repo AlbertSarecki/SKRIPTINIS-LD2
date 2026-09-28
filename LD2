@@ -1,0 +1,62 @@
+clear;
+clc;
+
+a = (200:-10:10)';
+b = log10(a);
+c = 10.^b;
+d = c - a;
+
+disp('--- 1 DALIS ---');
+disp('Vektorius a (pirmi 5 elementai):');
+disp(a(1:5)');
+disp('Atimties rezultatas d (visos reiksmes turi buti 0):');
+disp(d');
+
+A = [pi/2, 3i, exp(pi);
+    log2(2), 2*pi, log10(1);
+    log(exp(1)), pi^pi, cos(pi)];
+
+A(:, 2) = rand(3, 1);
+stulpeliu_sumos = sum(A);
+
+disp(' ');
+disp('--- 2 DALIS ---');
+disp('Stulpeliu sumos:');
+disp(stulpeliu_sumos);
+
+A_val = 6;
+f = 2;
+sigma = 1.5;
+U1 = 4;
+U2 = 2;
+
+t = 0:0.005:2;
+s_pure = A_val * cos(2 * pi * f * t);
+n = sigma * randn(size(t));
+s = s_pure + n;
+
+s_atrinktas = s(s > U1);
+
+s_filtruotas = s;
+s_filtruotas(abs(s_filtruotas) < U2) = 0;
+
+dydis_nefiltruoto = length(s);
+dydis_atrinkto = length(s_atrinktas);
+
+max_reiktsme = max(s_filtruotas);
+min_reiktsme = min(s_filtruotas);
+
+disp(' ');
+disp('--- 3 DALIS ---');
+disp(['Nefiltruoto dydis: ', num2str(dydis_nefiltruoto)]);
+disp(['Atrinkto dydis: ', num2str(dydis_atrinkto)]);
+disp(['Max filtruoto reiktsme: ', num2str(max_reiktsme)]);
+disp(['Min filtruoto reiktsme: ', num2str(min_reiktsme)]);
+
+disp(' ');
+disp('--- PAPILDOMA UŽDUOTIS (P1) ---');
+A_p1 = input('Iveskite 12 elementu vektoriu A: ');
+B = A_p1([10:end, 1:9]);
+
+disp('vektorius B yra:')
+disp(B)
